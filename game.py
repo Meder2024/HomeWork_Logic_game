@@ -1,7 +1,8 @@
 from secret import generate_secret_number
 from evaluate import evaluate_guess
+from database import create_database, register_player, get_player_id
 
-def play_game():
+def play_game(player_id):
     print("Добро пожаловать в игру 'Быки и коровы'!")
     print("Компьютер загадал четырехзначное число с неповторяющимися цифрами.")
     print("Попробуйте угадать его.\n")
@@ -27,8 +28,20 @@ def play_game():
         else:
             print(f"Быки: {bulls}, Коровы: {cows}")
 
+def main():
+    create_database()
+    username = input("Введите ваше имя для регистрации: ")
+    register_player(username)
+    player_id = get_player_id(username)
+    play_game(player_id)
+
 if __name__ == "__main__":
-    play_game()
+    main()
+
+
+
+
+
 
 # За каждую цифру, которая угадана и стоит на правильной позиции, игрок получает "быка".
 # За каждую цифру, которая угадана, но стоит на неправильной позиции, игрок получает "корову".
